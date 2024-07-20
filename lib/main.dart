@@ -13,7 +13,7 @@ class Quizzler extends StatelessWidget {
   Widget build(BuildContext context) {
     return  MaterialApp(
       home: Scaffold(
-        backgroundColor: Colors.grey,
+        backgroundColor: Colors.grey.shade900,
         body: SafeArea(child: Padding(
             padding: EdgeInsets.symmetric(horizontal: 10.0),
           child: quizpage(),
@@ -39,14 +39,16 @@ class _quizpageState extends State<quizpage> {
       children: [
         Expanded(
           flex: 5,
-          child: Padding(
-              padding: EdgeInsets.all(10.0),
-            child: Text(
-              'This is where question text will go',
-          textAlign: TextAlign.center,
-              style: TextStyle(
-                fontSize: 25.0,
-                color: Colors.white
+          child: Center(
+            child: Padding(
+                padding: EdgeInsets.all(10.0),
+              child: Text(
+                'This is where question text will go',
+            textAlign: TextAlign.center,
+                style: TextStyle(
+                  fontSize: 25.0,
+                  color: Colors.white
+                ),
               ),
             ),
           ),
@@ -94,6 +96,26 @@ class _quizpageState extends State<quizpage> {
 
             ),
           ),
+        ),
+        Row(
+          children: [
+            Icon(
+              Icons.check,
+              color: Colors.green,
+            ),
+            Icon(
+              Icons.close,
+              color: Colors.red,
+            ),
+            Icon(
+              Icons.close,
+              color: Colors.red,
+            ),
+            Icon(
+              Icons.close,
+              color: Colors.red,
+            ),
+          ],
         )
       ],
     );
