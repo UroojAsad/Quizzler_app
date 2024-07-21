@@ -26,11 +26,49 @@ class Quizzler extends StatelessWidget {
 }
 class quizpage extends StatefulWidget {
 
+
+
+
   @override
   State<quizpage> createState() => _quizpageState();
 }
 
 class _quizpageState extends State<quizpage> {
+
+  List<Icon> Scorekeeper =[
+    Icon(
+      Icons.check,
+      color: Colors.green,
+    ),
+    Icon(
+      Icons.close,
+      color: Colors.red,
+    ),
+    Icon(
+      Icons.close,
+      color: Colors.red,
+    ),
+    Icon(
+      Icons.close,
+      color: Colors.red,
+    ),
+
+  ];
+
+  List<String> Questions = [
+  'You can lead a cow down stairs but not up stairs.',
+   'Approximately one quarter of human bones are in the feet.',
+  'A slug\'s blood is green.'
+  ];
+
+  List<bool> answere =[
+    false,
+    true,
+    true
+  ];
+  int QuestionNumber = 0;
+
+
   @override
   Widget build(BuildContext context) {
     return  Column(
@@ -42,8 +80,9 @@ class _quizpageState extends State<quizpage> {
           child: Center(
             child: Padding(
                 padding: EdgeInsets.all(10.0),
+
               child: Text(
-                'This is where question text will go',
+                Questions[QuestionNumber],
             textAlign: TextAlign.center,
                 style: TextStyle(
                   fontSize: 25.0,
@@ -63,6 +102,22 @@ class _quizpageState extends State<quizpage> {
               ),
               onPressed: ()
               {
+                bool correctAnswere= answere[QuestionNumber];
+
+                if (correctAnswere=true){
+                  print('user got it right!');
+                }
+                else {
+                  print('user got it wrong!');
+                }
+                setState(() {
+                  Scorekeeper.add(
+                      Icon(Icons.check,
+                      color: Colors.green,)
+                  );
+                  QuestionNumber++;
+                });
+                print(QuestionNumber);
             },
             child: Text(
               'True',
@@ -85,6 +140,23 @@ class _quizpageState extends State<quizpage> {
               ),
               onPressed: ()
               {
+                bool correctAnswere= answere[QuestionNumber];
+
+                if (correctAnswere=true){
+                  print('user got it right!');
+                }
+                else {
+                  print('user got it wrong!');
+                }
+                setState(() {
+                  Scorekeeper.add(
+                      Icon(Icons.check,
+                        color: Colors.green,)
+                  );
+                  QuestionNumber++;
+                }
+                );
+                print(QuestionNumber);
               },
               child: Text(
                 'False',
@@ -98,24 +170,8 @@ class _quizpageState extends State<quizpage> {
           ),
         ),
         Row(
-          children: [
-            Icon(
-              Icons.check,
-              color: Colors.green,
-            ),
-            Icon(
-              Icons.close,
-              color: Colors.red,
-            ),
-            Icon(
-              Icons.close,
-              color: Colors.red,
-            ),
-            Icon(
-              Icons.close,
-              color: Colors.red,
-            ),
-          ],
+          children: Scorekeeper,
+
         )
       ],
     );
