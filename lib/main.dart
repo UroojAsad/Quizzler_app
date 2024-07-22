@@ -1,7 +1,10 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'question.dart';
+import 'quizzler_brain.dart';
 
+QuizBrain     quizBrain = QuizBrain();
 void main() {
   runApp( Quizzler());
 }
@@ -35,38 +38,59 @@ class quizpage extends StatefulWidget {
 
 class _quizpageState extends State<quizpage> {
 
+  void correctAnswere(bool userPickAnswere){
+    bool correctAnswere= quizBrain.getQuestioAnswere();
+    setState(() {
+    if (userPickAnswere == correctAnswere ){
+      Scorekeeper.add(
+          Icon(Icons.check,
+            color: Colors.green,)
+      );}
+    else {
+      Scorekeeper.add(
+          Icon(Icons.close,
+            color: Colors.red,)
+      );}
+    quizBrain.nextQuestion();
+    }
+    );
+  }
+
   List<Icon> Scorekeeper =[
-    Icon(
-      Icons.check,
-      color: Colors.green,
-    ),
-    Icon(
-      Icons.close,
-      color: Colors.red,
-    ),
-    Icon(
-      Icons.close,
-      color: Colors.red,
-    ),
-    Icon(
-      Icons.close,
-      color: Colors.red,
-    ),
+    // Icon(
+    //   Icons.check,
+    //   color: Colors.green,
+    // ),
+    // Icon(
+    //   Icons.close,
+    //   color: Colors.red,
+    // ),
+    // Icon(
+    //   Icons.close,
+    //   color: Colors.red,
+    // ),
+    // Icon(
+    //   Icons.close,
+    //   color: Colors.red,
+    // ),
 
   ];
 
-  List<String> Questions = [
-  'You can lead a cow down stairs but not up stairs.',
-   'Approximately one quarter of human bones are in the feet.',
-  'A slug\'s blood is green.'
-  ];
+  // List<String> Questions = [
+  // 'You can lead a cow down stairs but not up stairs.',
+  //  'Approximately one quarter of human bones are in the feet.',
+  // 'A slug\'s blood is green.'
+  // ];
+  //
+  // List<bool> answere =[
+  //   false,
+  //   true,
+  //   true
+  // ];
+  //
+  // Question q1=Question('You can lead a cow down stairs but not up stairs.', false),
 
-  List<bool> answere =[
-    false,
-    true,
-    true
-  ];
-  int QuestionNumber = 0;
+
 
 
   @override
@@ -82,7 +106,7 @@ class _quizpageState extends State<quizpage> {
                 padding: EdgeInsets.all(10.0),
 
               child: Text(
-                Questions[QuestionNumber],
+                quizBrain.getQuestionText(),
             textAlign: TextAlign.center,
                 style: TextStyle(
                   fontSize: 25.0,
@@ -102,22 +126,7 @@ class _quizpageState extends State<quizpage> {
               ),
               onPressed: ()
               {
-                bool correctAnswere= answere[QuestionNumber];
-
-                if (correctAnswere=true){
-                  print('user got it right!');
-                }
-                else {
-                  print('user got it wrong!');
-                }
-                setState(() {
-                  Scorekeeper.add(
-                      Icon(Icons.check,
-                      color: Colors.green,)
-                  );
-                  QuestionNumber++;
-                });
-                print(QuestionNumber);
+                correctAnswere(true);
             },
             child: Text(
               'True',
@@ -140,23 +149,8 @@ class _quizpageState extends State<quizpage> {
               ),
               onPressed: ()
               {
-                bool correctAnswere= answere[QuestionNumber];
+                correctAnswere(false);
 
-                if (correctAnswere=true){
-                  print('user got it right!');
-                }
-                else {
-                  print('user got it wrong!');
-                }
-                setState(() {
-                  Scorekeeper.add(
-                      Icon(Icons.check,
-                        color: Colors.green,)
-                  );
-                  QuestionNumber++;
-                }
-                );
-                print(QuestionNumber);
               },
               child: Text(
                 'False',
